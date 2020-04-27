@@ -2,17 +2,20 @@
 
 ## Description
 
-typoo is short for "TYPOgraphy as Ontology". It is a RDF/OWL-based ontology to describe microtypography (in digital scholarly editions), i.e. the design and usage of fonts. It was build in the context of a digital scholarly edition and ...
+typoo is short for "TYPOgraphy as Ontology". It is a RDF/OWL-based ontology to describe microtypography (in digital scholarly editions), i.e. the design and usage of fonts. typoo consists of 52 classes and 17 object properties whos definition can be seen as constant "work-in-progress" (please share your own ideas!). 
 
 ![Image of typoo in VOWL](https://github.com/FrederikeNeuber/typoo/blob/master/media/typoo-vowl.png)
 
-### Participate: If you have questions or share your opinion or discuss my work just open a GitHub issue or contact me via email.
+### Participate
+
+If you have questions or share your opinion or discuss my work just open a GitHub issue or contact me via email.
 
 ### Creation and Usage
 
-*Author:* Frederike Neuber (neuber.frederike@gmail.com)
-*License:* CC-BY 3.0
+**Author:** Frederike Neuber (neuber.frederike@gmail.com)
 
-typoo emerged within the author’s dissertation at the Centre for Information Modelling at the University of Graz and the Digital Scholarly Editions Initial Training Network DiXiT (funded 2013 –2017 under Marie Curie Actions within the European Commission’s 7th Framework).
+**Context of Creation:** typoo emerged within the author’s dissertation at the Centre for Information Modelling at the University of Graz and the Digital Scholarly Editions Initial Training Network DiXiT (funded 2013 –2017 under Marie Curie Actions within the European Commission’s 7th Framework).
+
+**License:** CC-BY 3.0
 
     
