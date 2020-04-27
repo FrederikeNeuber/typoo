@@ -1,8 +1,8 @@
 # typoo
 
-## RDF/OWL based ontology to describe microtypography (in digital scholarly editions)
+## Description
 
-typoo is short for "TYPOgraphy as Ontology".
+typoo is short for "TYPOgraphy as Ontology". It is a RDF/OWL-based ontology to describe microtypography (in digital scholarly editions), i.e. the design and usage of fonts. It was build in the context of a digital scholarly edition and ...
 
 ![Image of typoo in VOWL](https://github.com/FrederikeNeuber/typoo/blob/master/media/typoo-vowl.png)
 
