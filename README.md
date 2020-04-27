@@ -8,8 +8,11 @@ typoo is short for "TYPOgraphy as Ontology". It is a RDF/OWL-based ontology to d
 
 ### Participate: If you have questions or share your opinion or discuss my work just open a GitHub issue or contact me via email.
 
-### 
-Author: Frederike Neuber (neuber.frederike@gmail.com)
-License: CC-BY 3.0
+### Creation and Usage
+
+*Author:* Frederike Neuber (neuber.frederike@gmail.com)
+*License:* CC-BY 3.0
+
+typoo emerged within the author’s dissertation at the Centre for Information Modelling at the University of Graz and the Digital Scholarly Editions Initial Training Network DiXiT (funded 2013 –2017 under Marie Curie Actions within the European Commission’s 7th Framework).
 
     
