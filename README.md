@@ -1,4 +1,4 @@
-# typoo: an ontology to describe microtypography (in digital scholarly editions)
+# typoo: an ontology to describe microtypography 
 
 ## Description
 
