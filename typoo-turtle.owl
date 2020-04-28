@@ -1,0 +1,1024 @@
+@prefix : <http://gams.uni-graz.at/o:typoo.ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix typoo: <http://glossa.uni-graz.at/o:typoo.ontology#> .
+@base <http://gams.uni-graz.at/o:typoo.ontology> .
+
+<http://gams.uni-graz.at/o:typoo.ontology> rdf:type owl:Ontology ;
+                                            owl:versionInfo """Version
+            1.0"""^^xsd:string ;
+                                            terms:creator "Frederike Neuber" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.w3.org/2004/02/skos/core#editorialNote
+skos:editorialNote rdf:type owl:AnnotationProperty ;
+                   rdfs:isDefinedBy "http://www.w3.org/2004/02/skos/core#editorialNote"^^xsd:anyURI .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://gams.uni-graz.at/o:typoo.ontology#feature
+:feature rdf:type owl:ObjectProperty ;
+         owl:inverseOf :featureOf ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :Type
+                                     :TypeFragment
+                                     :Typeface
+                                   )
+                     ] ;
+         rdfs:range :FragmentFeature ;
+         owl:propertyChainAxiom ( :part
+                                  :structure
+                                  :feature
+                                ) ;
+         rdfs:comment """A Structure Feature that characterizes a Structure Element as
+            well as the related Type and the Typeface it belongs to."""@en ,
+                      """Ein Strukturmerkmal, das ein Strukturelement sowie die
+            zugehörige Type und die dazugehörige Schriftart charakterisiert."""@de ;
+         rdfs:label "Merkmal"@de ,
+                    "feature"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#featureOf
+:featureOf rdf:type owl:ObjectProperty ;
+           rdfs:domain :FragmentFeature ;
+           rdfs:range [ rdf:type owl:Class ;
+                        owl:unionOf ( :Type
+                                      :TypeFragment
+                                      :Typeface
+                                    )
+                      ] ;
+           rdfs:comment """A Structure Element as well as the Type it belongs to and the
+            related Typeface that is also characterized by this Strcture Feature."""@en ,
+                        """Ein Strukturelement sowie die dazugehörige Type und die
+            zugehörige Schriftart, die ebenfalls durch dieses Strukturmerkmal gekennzeichnet
+            ist."""@de ;
+           rdfs:label "Merkmal von"@de ,
+                      "feature Of"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#formFeature
+:formFeature rdf:type owl:ObjectProperty ;
+             owl:inverseOf :formFeatureOf ;
+             rdfs:domain :Typeface ;
+             rdfs:range :CategoryForm ;
+             rdfs:comment """A Form Feature that according to design conventions
+            characterizes Typefaces (e.g. Stroke Constrast, Terminals, etc.)."""@en ,
+                          """Ein Formularmerkmal, das nach Designkonventionen Schriften
+            charakterisiert (z.B. Strichkontrast, Ausläufe, etc.)."""@de ;
+             rdfs:label "Form Feature"@en ,
+                        "Formenmerkmal"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#formFeatureOf
+:formFeatureOf rdf:type owl:ObjectProperty ;
+               rdfs:domain :CategoryForm ;
+               rdfs:range :Typeface ;
+               rdfs:comment """A Typeface that is characterized by a Form Feature of design
+            conventions."""@en ,
+                            """Eine Schriftart, die durch ein Formenmerkmal gekennzeichnet
+            ist."""@de ;
+               rdfs:label "Formenmerkmal von"@de ,
+                          "form Feature Of"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#manifestation
+:manifestation rdf:type owl:ObjectProperty ;
+               owl:inverseOf :manifestationOf ;
+               rdfs:comment """A Grapheme, an Allograph, a Font Type, a Design Type or a Graph
+            in which an Archigrapheme, a Grapheme, an Allograph, a Design Type or a Font Type are
+            manifested."""@en ,
+                            """Ein Graphem, ein Allograph, eine Type, eine Drucktype oder ein
+            Protograph, in dem sich ein Archigraphem, ein Graphem, ein Allograph, eine Type, eine
+            Drucktype manifestiert."""@de ;
+               rdfs:label "Manifestation"@de ,
+                          "manifestation"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#manifestationOf
+:manifestationOf rdf:type owl:ObjectProperty ;
+                 rdfs:comment """An Archigrapheme, a Grapheme, an Allograph, a Design Type or a
+            Font Type which are manifested by a Grapheme, an Allograph, a Design Type, a Font Type
+            or a Protoraph."""@en ,
+                              """Ein Archigraphem, ein Graphem, ein Allograph, eine Type oder
+            eine Drucktype, die sich durch ein Graphem, ein Allograph, eine Type, eine Drucktype
+            oder einen Protographen manifestieren."""@de ;
+                 rdfs:label "Manifestation von"@de ,
+                            "manifestation Of"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#occurence
+:occurence rdf:type owl:ObjectProperty ;
+           owl:inverseOf :occurenceOf ;
+           owl:propertyChainAxiom ( :manifestation
+                                    :part
+                                    :occurence
+                                  ) ,
+                                  ( :occurence
+                                    :subdivisionOf
+                                  ) ,
+                                  ( :part
+                                    :occurence
+                                  ) ;
+           rdfs:comment """A Function Area or an Item Part in which a Protograph
+            occurs."""@en ,
+                        """Ein Funktionsbereich oder Exemplarteil in dem ein Protograph
+            auftritt."""@de ;
+           rdfs:label "Vorkommen"@de ,
+                      "occurence"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#occurenceOf
+:occurenceOf rdf:type owl:ObjectProperty ;
+             rdfs:domain :CategoryContext ;
+             owl:propertyChainAxiom ( :occurenceOf
+                                      :partOf
+                                    ) ;
+             rdfs:comment """A Protograph which occurs in an Item Part and a Function
+            Area."""@en ,
+                          """Ein Protograph, der in einem Funktionsbereich und einem
+            Exemplarteil auftritt."""@de ;
+             rdfs:label "Vorkommen von"@de ,
+                        "occurence Of"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#part
+:part rdf:type owl:ObjectProperty ;
+      owl:inverseOf :partOf ;
+      rdfs:domain [ rdf:type owl:Class ;
+                    owl:unionOf ( :Font
+                                  :Typeface
+                                )
+                  ] ;
+      rdfs:range [ rdf:type owl:Class ;
+                   owl:unionOf ( :FontType
+                                 :Type
+                               )
+                 ] ;
+      rdfs:comment """A Type which belongs to a Typeface or a Font-Type wich belongs
+            to a Font."""@en ,
+                   """Eine Type, die zu einer Schriftart gehört, oder eine Drucktype
+            die zu einem Schriftschnitt gehört."""@de ;
+      rdfs:label "Teil"@de ,
+                 "part"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#partOf
+:partOf rdf:type owl:ObjectProperty ;
+        rdfs:domain [ rdf:type owl:Class ;
+                      owl:unionOf ( :FontType
+                                    :Type
+                                  )
+                    ] ;
+        rdfs:range [ rdf:type owl:Class ;
+                     owl:unionOf ( :Font
+                                   :Typeface
+                                 )
+                   ] ;
+        rdfs:comment """A Typeface to which Design Type belongs or a Font to which a
+            Font Type belongs."""@en ,
+                     """Eine Schriftart, zu der eine Type gehört, oder ein
+            Schriftschnitt, zu dem eine Druck Type gehört."""@de ;
+        rdfs:label "Teil von"@de ,
+                   "part Of"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#relation
+:relation rdf:type owl:ObjectProperty ;
+          owl:inverseOf :relation ;
+          rdf:type owl:SymmetricProperty ;
+          rdfs:domain :CategoryScriptIndividuals ;
+          rdfs:range :CategoryScriptIndividuals ;
+          owl:propertyChainAxiom ( :manifestation
+                                   :manifestation
+                                 ) ,
+                                 ( :manifestation
+                                   :manifestation
+                                   :manifestation
+                                 ) ,
+                                 ( :manifestation
+                                   :manifestation
+                                   :manifestation
+                                   :manifestation
+                                 ) ,
+                                 ( :manifestation
+                                   :manifestation
+                                   :manifestation
+                                   :manifestation
+                                   :manifestation
+                                 ) ,
+                                 ( :manifestationOf
+                                   :manifestationOf
+                                 ) ,
+                                 ( :manifestationOf
+                                   :manifestationOf
+                                   :manifestationOf
+                                 ) ,
+                                 ( :manifestationOf
+                                   :manifestationOf
+                                   :manifestationOf
+                                   :manifestationOf
+                                 ) ,
+                                 ( :manifestationOf
+                                   :manifestationOf
+                                   :manifestationOf
+                                   :manifestationOf
+                                   :manifestationOf
+                                 ) ;
+          rdfs:comment """An Archigrapheme, a Grapheme, an Allograph, a Font Type or a
+            Graph which is related through a chain of manifestations with an Archigrapheme, a
+            Grapheme, an Allograph, a Font Type or a Graph."""@en ,
+                       """Ein Archigraphem, ein Graphem, ein Allograph, eine Desing-Type,
+            Drucktype oder ein Protograph, die jeweils durch eine Eigenschafts-Kette von
+            Manifestationen mit einem anderen Archigraphem, einem Graphem, einem Allographen, einer
+            Type, einer Drucktype oder einem Protographen in Beziehung stehen."""@de ;
+          rdfs:label "Beziehung"@de ,
+                     "relation"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#structure
+:structure rdf:type owl:ObjectProperty ;
+           owl:inverseOf :structureOf ;
+           rdfs:domain :Type ;
+           rdfs:range :TypeFragment ;
+           rdfs:comment "A Structure Element of a Design Type."@en ,
+                        "Ein Strukturelement einer Type."@de ;
+           rdfs:label "Struktur"@de ,
+                      "structure"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#structureOf
+:structureOf rdf:type owl:ObjectProperty ;
+             rdfs:domain :TypeFragment ;
+             rdfs:range :Type ;
+             rdfs:comment "A Font Type that comprises a Structure Element."@en ,
+                          """Eine Drucktype die über ein Strukturelement
+            verfügt."""@de ;
+             rdfs:label "Struktur von"@de ,
+                        "structure Of"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#style
+:style rdf:type owl:ObjectProperty ;
+       owl:inverseOf :styleOf ;
+       rdfs:domain :Font ;
+       rdfs:comment """Stilelemente, die einen Schriftschnitt nach typografischen
+            Konventionen charakterisieren (z.B. Name, Dickte, Größe, etc.)"""@de ,
+                    """Style elements that characterize a typeface according to
+            typographical conventions (e.g. name, width, size, etc.)."""@en ;
+       rdfs:label "Stil"@de ,
+                  "style"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#styleOf
+:styleOf rdf:type owl:ObjectProperty ;
+         rdfs:range :Font ;
+         rdfs:comment "A Font that is chracterized by a Font Style"@en ,
+                      """Ein Schriftschnitt, der durch einen Schriftstil charakterisiert
+            wird."""@de ;
+         rdfs:label "style Of"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#subdivision
+:subdivision rdf:type owl:ObjectProperty ;
+             owl:inverseOf :subdivisionOf ;
+             rdfs:comment """An Item Part that is a subdivision of an Item or a Function Area
+            that is a subdivision of an Item Part."""@en ,
+                          """Ein Exemplarteil, der eine Unterteilung eines Exemplars ist,
+            oder ein Funktionsbereich, der eine Unterteilung eines Exemplarteils ist."""@de ;
+             rdfs:label "Teilbereich"@de ,
+                        "subdivision"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#subdivisionOf
+:subdivisionOf rdf:type owl:ObjectProperty ;
+               rdfs:comment """An Item that is subdivided in Item Parts or an Item Part that is
+            subdivided in Function Areas."""@en ,
+                            """Ein Exemplar, das in Exemplarteile unterteilt ist, oder ein
+            Exemplarteil, der in Funktionsbereiche unterteilt ist."""@de ;
+               rdfs:label "Teilbereich von"@de ,
+                          "subdivision Of"@en .
+
+
+###  http://www.w3.org/2002/07/owl#topObjectProperty
+owl:topObjectProperty rdf:type owl:ObjectProperty ,
+                               owl:SymmetricProperty ,
+                               owl:TransitiveProperty ,
+                               owl:ReflexiveProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://gams.uni-graz.at/o:typoo.ontology#protograph
+:protograph rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Type ;
+            rdfs:range xsd:anyURI ;
+            rdfs:comment """Stellvertreter bzw. ‚Schablone‘ für alle im Druckerzeugnis
+            gleichförmig erscheinenden Graphen, welche auf die gleiche Drucktype zurückgehen. Bsp.:
+            „Das ‚t‘ aus dem Teppich des Lebens“; „Das ‚t‘ aus der Gesamt-Ausgabe“."""@de ;
+            rdfs:label "Protograph"@de .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Allograph
+:Allograph rdf:type owl:Class ;
+           rdfs:subClassOf :CategoryScriptIndividuals ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :manifestation ;
+                             owl:allValuesFrom :Type
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :manifestationOf ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass :Grapheme
+                           ] ;
+           rdfs:comment "A cultural or regional recognized form of graphically realizing a written unit , e.g. \"one-story a\" and \"two-story a\", \"Carolingian t\" and \"Roman t\""@en ,
+                        "Eine von einer kulturhistorisch oder regional bedingten Schriftgemeinschaft anerkannte Form, eine schriftliche Einheit graphisch zu realisieren, z. B. \"einstöckiges a\" und \"zweistöckiges a\", \"karolingisches t\" und \"römisches t\""@de ;
+           rdfs:label "Allograph"@de ,
+                      "Allograph"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Apex
+:Apex rdf:type owl:Class ;
+      rdfs:subClassOf :TypeFragment ;
+      rdfs:comment """Das Zusammentreffen von zwei Strichen (oft oben), z.B.
+            \"A\", \"W\" und \"M\"."""@de ;
+      rdfs:label "Apex"@en ,
+                 "Scheitel"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Archigrapheme
+:Archigrapheme rdf:type owl:Class ;
+               rdfs:subClassOf :CategoryScriptIndividuals ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :manifestation ;
+                                 owl:allValuesFrom :Grapheme
+                               ] ;
+               rdfs:comment "Einheit, zur Repräsentation der abstrakten Bedeutung eines Graphen, Allographen oder Graphems ohne Bindung an eine bestimmte Form"@de ,
+                            "Unit that represents the abstract meaning of a graph, allograph or grapheme without being bound to a certain form"@en ;
+               rdfs:label "Archigraphem"@de ,
+                          "Archigrapheme"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Arm
+:Arm rdf:type owl:Class ;
+     rdfs:subClassOf :TypeFragment ;
+     rdfs:comment "Querbalken (E, e, F, f, L)"@de ;
+     rdfs:label "Arm"@de ,
+                "Arm"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#BodyText
+:BodyText rdf:type owl:Class ;
+          rdfs:subClassOf :FunctionArea ;
+          rdfs:comment "Bereich/e des Mengentextes bzw. der Brotschrift."@de ;
+          rdfs:label "Body Text"@en ,
+                     "Mengenschrift"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Bow
+:Bow rdf:type owl:Class ;
+     rdfs:subClassOf :TypeFragment ;
+     rdfs:comment """Form der Linien (z.B. \"gerundet\" oder
+            \"flach\")."""@de ;
+     rdfs:label "Bogen"@de ,
+                "Bow"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#BrokenLines
+:BrokenLines rdf:type owl:Class ;
+             rdfs:subClassOf :Lines ;
+             owl:disjointWith :RoundedLines ;
+             rdfs:comment "Broken lines (e.g. Fraktur fonts)"@en ,
+                          "Gebrochene Strichführung (z. B. Fraktur-Schriften)"@de ;
+             rdfs:label "Broken Lines"@en ,
+                        "Gebrochene Linienführung"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#CategoryContext
+:CategoryContext rdf:type owl:Class ;
+                 owl:equivalentClass [ rdf:type owl:Class ;
+                                       owl:unionOf ( :FunctionArea
+                                                     :Item
+                                                     :ItemPart
+                                                   )
+                                     ] ;
+                 rdfs:comment "Context classes represent the textual and/or material context in which typography occurs"@en ,
+                              "Kontextklassen repräsentieren den textuellen und/oder materialen Kontext, in dem Typografie auftritt"@de ;
+                 rdfs:label "Category Context"@en ,
+                            "Kategorie Kontext"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#CategoryForm
+:CategoryForm rdf:type owl:Class ;
+              owl:equivalentClass [ rdf:type owl:Class ;
+                                    owl:unionOf ( :ContrastModel
+                                                  :FormPrinciple
+                                                  :Lines
+                                                  :Terminals
+                                                )
+                                  ] ;
+              rdfs:comment "Form classes represent typographical design features of a typeface"@en ,
+                           "Formklassen repräsentieren die typografischen Gestaltungsmerkmale von Schriftarten"@de ;
+              rdfs:label "Category Form"@en ,
+                         "Kategorie Form"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#CategoryScriptGroups
+:CategoryScriptGroups rdf:type owl:Class ;
+                      owl:equivalentClass [ rdf:type owl:Class ;
+                                            owl:unionOf ( :Font
+                                                          :Typeface
+                                                        )
+                                          ] ;
+                      rdfs:comment "Schriftgruppenklassen repräsentieren Gruppierungen von singulären Schrifteinheiten"@de ,
+                                   "Script Classes represent groupings of singular units of a typeface or font"@en ;
+                      rdfs:label "Category Script Groups"@en ,
+                                 "Kategorie Schriftgruppen"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#CategoryScriptIndividuals
+:CategoryScriptIndividuals rdf:type owl:Class ;
+                           owl:equivalentClass [ rdf:type owl:Class ;
+                                                 owl:unionOf ( :Allograph
+                                                               :Archigrapheme
+                                                               :FontType
+                                                               :Grapheme
+                                                               :Type
+                                                             )
+                                               ] ;
+                           rdfs:comment "Schriftindividuen Klassen repräsentieren Abstraktionsebenen singulärer Schrifteinheiten"@de ,
+                                        "Script individual classes represent abstraction levels of single units of microtypography"@en ;
+                           rdfs:label "Category Script Individuals"@en ,
+                                      "Kategorie Schriftindividuen"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#CategoryTypeMorphology
+:CategoryTypeMorphology rdf:type owl:Class ;
+                        owl:equivalentClass [ rdf:type owl:Class ;
+                                              owl:unionOf ( :FragmentFeature
+                                                            :TypeFragment
+                                                          )
+                                            ] ;
+                        rdfs:comment "Typen Strukturklassen repräsentieren die morphologische Struktur einer Type und ihre Merkmale"@de ;
+                        rdfs:label "Type Morphology"@en ,
+                                   "Type structure classes represent the morphological structure of a type and its characteristics"@en ,
+                                   "Typenmorphologie"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Cicero
+:Cicero rdf:type owl:Class ;
+        rdfs:subClassOf :Font ;
+        rdfs:comment "Eine mittlere Schriftgrößen im Bleisatz. Sie hat eine Kegelhöhe von zwölf Didot-Punkten, das entspricht 4,512 mm"@de ;
+        rdfs:label "Cicero"@de ,
+                   "Cicero"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#ContrastModel
+:ContrastModel rdf:type owl:Class ;
+               rdfs:subClassOf :CategoryForm ;
+               rdfs:comment "Contrast model of strokes"@en ,
+                            "Kontrastmodell der Striche"@de ;
+               rdfs:label "Contrast Model"@en ,
+                          "Kontrastmodell"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Counter
+:Counter rdf:type owl:Class ;
+         rdfs:subClassOf :TypeFragment ;
+         rdfs:comment """Bereich, der ganz oder teilweise eingeschlossen ist, z.B.
+            \"a\", \"p\" und \"c\"."""@de ;
+         rdfs:label "Counter"@en ,
+                    "Punze"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Crossbar
+:Crossbar rdf:type owl:Class ;
+          rdfs:subClassOf :TypeFragment ;
+          rdfs:comment """Normalerweise ein horizontaler Strich (z.B. in \"A\" und
+            \"H\")."""@de ;
+          rdfs:label "Crossbar"@en ,
+                     "Querbalken"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Decoration
+:Decoration rdf:type owl:Class ;
+            rdfs:subClassOf :FunctionArea ;
+            rdfs:comment "Bereich der Zierschrift."@de ;
+            rdfs:label "Decorative Type"@en ,
+                       "Zierschrift"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#DecorativeFormPrinciple
+:DecorativeFormPrinciple rdf:type owl:Class ;
+                         rdfs:subClassOf :FormPrinciple ;
+                         rdfs:comment "Form principle of free or decorative fonts (e.g. Jugendstil fonts)"@en ,
+                                      "Formprinzip freier bzw. dekorativer Schriften (z. B. Jugenstil-Schriften)"@de ;
+                         rdfs:label "Decorative Form Principle"@en ,
+                                    "Dekoratives Formprinzip"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Diagonal
+:Diagonal rdf:type owl:Class ;
+          rdfs:subClassOf :TypeFragment ;
+          rdfs:comment """Diagonale Verbindung wie in \"N\", \"M\" oder
+            \"Z\"."""@de ;
+          rdfs:label "Diagonal"@en ,
+                     "Diagonale"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#DynamicFormPrinciple
+:DynamicFormPrinciple rdf:type owl:Class ;
+                      rdfs:subClassOf :FormPrinciple ;
+                      rdfs:comment "Form principle of the broad nib with diagonal contrast axis with dynamic, open forms (Renaissance character with \"Garamond\" style)"@en ,
+                                   "Formprinzip der Breitfeder mit schräg liegender Kontrastachse mit dynamischen, offenen Formen (Renaissance-Charakter im Stil der \"Garamond)\""@de ;
+                      rdfs:label "Dynamic Form Principle"@en ,
+                                 "Dynamisches Formprinzip"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Font
+:Font rdf:type owl:Class ;
+      rdfs:subClassOf :CategoryScriptGroups ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :manifestationOf ;
+                        owl:allValuesFrom :Typeface
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :part ;
+                        owl:allValuesFrom :FontType
+                      ] ;
+      owl:disjointWith :Typeface ;
+      rdfs:comment "A repertoire of printing types that have a uniform style (e.g. size and width), e.g. \"St-G font Cicero\", \"St-G font corpus\"."@en ,
+                   "Ein Repertoire aus Drucktypen, das einen einheitlichen Schriftstil (z. B. Fette, Grad) hat, z. B. \"St-G-Schrift Cicero\", \"St-G-Schrift Korpus\""@de ;
+      rdfs:label "Font"@en ,
+                 "Schriftschnitt"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#FontType
+:FontType rdf:type owl:Class ;
+          rdfs:subClassOf :CategoryScriptIndividuals ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :partOf ;
+                            owl:someValuesFrom :Font
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :manifestationOf ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Type
+                          ] ;
+          rdfs:comment "A stylistic manifestation of the type, whereby \"style\" is used here in the typographic sense, i.e. for the form of expression of the type in a certain size: \"t\" of the St-G font in Cicero; \"t\" of the St-G font in Petit."@en ,
+                       "Eine stilistische Ausprägung der Type, wobei \"Stil\" hier im typografischen Sinne gebraucht wird, also für die Ausprägungsform der Type bspw. in einem bestimmten Schriftgrad: \"t\" der St-G-Schrift in Cicero; \"t\"der St-G-Schrift in Petit."@de ;
+          rdfs:label "Drucktype"@de ,
+                     "Font type"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#FormPrinciple
+:FormPrinciple rdf:type owl:Class ;
+               rdfs:subClassOf :CategoryForm ;
+               rdfs:comment "Form principle according to I. Kupferschmid (Buchstaben kommen selten allein: Ein typografisches Handbuch, 2. Aufl., Sulgen / Zürich 2004)"@en ,
+                            "Formprinzip nach I. Kupferschmid (Buchstaben kommen selten allein: Ein typografisches Handbuch, 2. Aufl., Sulgen / Zürich 2004.)"@de ;
+               rdfs:label "Form Principle"@en ,
+                          "Formprinzip"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#FragmentFeature
+:FragmentFeature rdf:type owl:Class ;
+                 rdfs:subClassOf :CategoryTypeMorphology ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :featureOf ;
+                                   owl:someValuesFrom :TypeFragment
+                                 ] ;
+                 owl:disjointWith :TypeFragment ;
+                 rdfs:comment "Art der gestalterischen Modifikation des Fragments. Bsp.: „begradigt“, „spitz“, „verkürzt“"@de ,
+                              "Type of design modification of the fragment. For example: \"straightened\", \"pointed\", \"shortened\""@en ;
+                 rdfs:label "Feature"@en ,
+                            "Merkmal"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#FunctionArea
+:FunctionArea rdf:type owl:Class ;
+              rdfs:subClassOf :CategoryContext ;
+              rdfs:comment "Der textuelle Funktionsbereich, in dem ein Protograph auftritt, z. B. \"Mengentext\", \"Titelseite\""@de ,
+                           "The textual-functional context in which a protograph appears, e.g. \"body text\", \"title page\""@en ;
+              rdfs:label "Function Area"@en ,
+                         "Funktionsbereich"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#GeometricFormPrinciple
+:GeometricFormPrinciple rdf:type owl:Class ;
+                        rdfs:subClassOf :FormPrinciple ;
+                        rdfs:comment "Form principle of the redis nib without line contrast with constructed forms (geometric character in the style of \"Futura\")"@en ,
+                                     "Formprinzip der Redisfeder ohne Strichkontrast mit konstruierten Formen (geometrischer Charakter im Stil der \"Futura\")"@de ;
+                        rdfs:label "Geometric Form Principle"@en ,
+                                   "Geometrisches Formprinzip"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Grapheme
+:Grapheme rdf:type owl:Class ;
+          rdfs:subClassOf :CategoryScriptIndividuals ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :manifestation ;
+                            owl:allValuesFrom :Allograph
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :manifestationOf ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Archigrapheme
+                          ] ;
+          rdfs:comment "Differentiation between upper and lower case letters as the smallest distinctive unit of a written language system"@en ,
+                       "Differenzierung zwischen Groß- und Kleinbuchstaben als kleinste bedeutungsunterscheidende Einheit eines Schriftsprachsystems. Bsp.: \"Minuskel g\" und \"Majuskel G\" in \"genossen\" und \"Genossen\""@de ;
+          rdfs:label "Graphem"@de ,
+                     "Grapheme"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Item
+:Item rdf:type owl:Class ;
+      rdfs:subClassOf :CategoryContext ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :occurenceOf ;
+                        owl:someValuesFrom :Font
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :occurenceOf ;
+                        owl:someValuesFrom :FontType
+                      ] ;
+      rdfs:comment "Typografische Überlieferung, die man mittels bibliografischer und buchkundlicher Metadaten bestimmen kann"@de ,
+                   "Typographical transmission, which can be determined by means of bibliographical and book-related metadata"@en ;
+      rdfs:isDefinedBy "http://vocab.org/frbr/core#term-Item"^^xsd:anyURI ;
+      rdfs:label "Exemplar"@de ,
+                 "Item"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#ItemPart
+:ItemPart rdf:type owl:Class ;
+          rdfs:subClassOf :CategoryContext ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :subdivisionOf ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Item
+                          ] ;
+          rdfs:comment "Sequence within a print, which can be indicated by a page interval and/or a description of the text part, e.g. \"Introduction, p. 3-5\""@en ,
+                       "Sequenz innerhalb eines Drucks, die man durch ein Seitenintervall und/oder die Angabe einer Bezeichnung des Textteils angegeben kann, z. B. \"Einleitung, S. 3–5\""@de ;
+          rdfs:label "Exemplarteil"@de ,
+                     "Item Part"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#ItemPartColophone
+:ItemPartColophone rdf:type owl:Class ;
+                   rdfs:subClassOf :ItemPart ;
+                   rdfs:label "Kolophon"@de ,
+                              "Kolophon"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#ItemPartPoems
+:ItemPartPoems rdf:type owl:Class ;
+               rdfs:subClassOf :ItemPart ;
+               rdfs:label "Gedichte"@de ,
+                          "Poems"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#ItemPartPreface
+:ItemPartPreface rdf:type owl:Class ;
+                 rdfs:subClassOf :ItemPart ;
+                 rdfs:label "Preface"@en ,
+                            "Vorwort"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#ItemPartTitle
+:ItemPartTitle rdf:type owl:Class ;
+               rdfs:subClassOf :ItemPart ;
+               rdfs:label "Titelblatt"@de ,
+                          "Title Page"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Korpus
+:Korpus rdf:type owl:Class ;
+        rdfs:subClassOf :Font ;
+        rdfs:comment "Eine mittlere Schriftgröße im Bleisatz. Sie hat eine Kegelhöhe von zehn Didot-Punkten, das entspricht 3,76 mm"@de ;
+        rdfs:label "Corpus"@en ,
+                   "Korpus"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#LinearStroke
+:LinearStroke rdf:type owl:Class ;
+              rdfs:subClassOf :ContrastModel ;
+              owl:disjointWith :StrokeContrast ;
+              rdfs:comment "Linear strokes, i.e. no contrast (e.g. grotesque fonts)"@en ,
+                           "Lineare Striche, d. h. kein Kontrast (z. B. Grotesk-Schriften)"@de ;
+              rdfs:label "Linear Strokes"@en ,
+                         "Lineare Striche"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Lines
+:Lines rdf:type owl:Class ;
+       rdfs:subClassOf :CategoryForm ;
+       rdfs:comment "Linienführung der Striche"@de ,
+                    "Style of lines"@en ;
+       rdfs:label "Lines"@en ,
+                  "Linienführung"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Petit
+:Petit rdf:type owl:Class ;
+       rdfs:subClassOf :Font ;
+       rdfs:comment "Eine kleine Schriftgröße im Bleisatz. Sie hat eine Kegelhöhe von acht Didot-Punkten, das entspricht 3,008 mm"@de ;
+       rdfs:label "Petit"@de ,
+                  "Petit"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#RoundedLines
+:RoundedLines rdf:type owl:Class ;
+              rdfs:subClassOf :Lines ;
+              rdfs:comment "Abgerundete Linienführung (z. B. Antiqua-Schriften)"@de ,
+                           "Rounded lines (e.g. Antiqua typefaces)"@en ;
+              rdfs:label "Abgerundete Linienführung"@de ,
+                         "Rounded Lines"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#SansSerifs
+:SansSerifs rdf:type owl:Class ;
+            rdfs:subClassOf :Terminals ;
+            owl:disjointWith :Serifs ;
+            rdfs:comment "Serifenlose Endstrichbehandlung"@de ,
+                         "Terminals without serifs"@en ;
+            rdfs:label "Sans Serif"@en ,
+                       "Serifenlos"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Serifs
+:Serifs rdf:type owl:Class ;
+        rdfs:subClassOf :Terminals ;
+        rdfs:comment "Endstrichbehandlung mit Serifen"@de ,
+                     "Terminals with serifs"@en ;
+        rdfs:label "Serifen"@de ,
+                   "Serifs"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Sides
+:Sides rdf:type owl:Class ;
+       rdfs:subClassOf :TypeFragment ;
+       rdfs:comment """Gegenüberliegende senkrechte bzw. schräge Seiten, z.B. in
+            \"W\", \"A\" und \"v\"."""@de ;
+       rdfs:label "Schenkel"@de ,
+                  "Sides"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#StaticFormPrinciple
+:StaticFormPrinciple rdf:type owl:Class ;
+                     rdfs:subClassOf :FormPrinciple ;
+                     rdfs:comment "Form principle of the pointed nib with vertical contrast axis and static, closed forms (classical character in the style of \"Bodoni\")"@en ,
+                                  "Formprinzip der Spitzfeder mit senkrechter Kontrastachse und statischen, geschlossenen Formen (klassizistischer Charakter im Stil der \"Bodoni\")"@de ;
+                     rdfs:label "Static Form Principle"@en ,
+                                "Statisches Formprinzip"@de .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Stem
+:Stem rdf:type owl:Class ;
+      rdfs:subClassOf :TypeFragment ;
+      rdfs:comment "(Meist) senkrechte Linie."@de ;
+      rdfs:label "Stamm"@de ,
+                 "Stem"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#StrokeContrast
+:StrokeContrast rdf:type owl:Class ;
+                rdfs:subClassOf :ContrastModel ;
+                rdfs:comment "Lines with different widths (e.g. Antiqua fonts)"@en ,
+                             "Striche mit unterschiedlicher Breite (z. B. Antiqua-Schriften)"@de ;
+                rdfs:label "Strichkontrast"@de ,
+                           "Stroke Contrast"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Tail
+:Tail rdf:type owl:Class ;
+      rdfs:subClassOf :TypeFragment ;
+      rdfs:comment """Abwärts gerichteter Strich, manchmal dekorativ, z.B. in
+            \"Q\" oder \"G\"."""@de ;
+      rdfs:label "Schweif"@de ,
+                 "Tail"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Terminals
+:Terminals rdf:type owl:Class ;
+           rdfs:subClassOf :CategoryForm ;
+           rdfs:comment "Design of terminals"@en ,
+                        "Gestaltung der Endstriche"@de ;
+           rdfs:label "Endstrichbehandlung"@de ,
+                      "Terminals"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Tertia
+:Tertia rdf:type owl:Class ;
+        rdfs:subClassOf :Font ;
+        rdfs:comment "Eine mittlere Schriftgröße im Bleisatz. Sie hat eine Kegelhöhe von 16 Didot-Punkten, das entspricht 6,016 mm"@de ;
+        rdfs:label "Tertia"@de ,
+                   "Tertia"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Title
+:Title rdf:type owl:Class ;
+       rdfs:subClassOf :FunctionArea ;
+       rdfs:comment "Bereich/e des ausgezeichneten Texts."@de ;
+       rdfs:label "Titelschrift"@de ,
+                  "Title Area"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Type
+:Type rdf:type owl:Class ;
+      rdfs:subClassOf :CategoryScriptIndividuals ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :partOf ;
+                        owl:someValuesFrom :Typeface
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :manifestation ;
+                        owl:allValuesFrom :FontType
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :structure ;
+                        owl:allValuesFrom :TypeFragment
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :manifestationOf ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onClass :Allograph
+                      ] ;
+      rdfs:comment "An allograph form designed with typographical resources. Slight structural modifications of the allograph form can also be part of the type design, e.g: \"A\" the Garamond, \"A\" the Akzidenz-Grotesk, \"A\" the St-G typeface (with flat vertex)"@en ,
+                   "Eine mit typografischen Mitteln gestaltete Allographenform. Auch leichte strukturelle Modifikationen der Allographenform können zur Gestaltung der Type zählen, z. B.: \"A\" der Garamond, \"A\" der Akzidenz-Grotesk, \"A\" der St-G-Schrift (mit flachem Scheitelpunkt)"@de ;
+      rdfs:label "Type"@de ,
+                 "Type"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#TypeFragment
+:TypeFragment rdf:type owl:Class ;
+              rdfs:subClassOf :CategoryTypeMorphology ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :feature ;
+                                owl:someValuesFrom :FragmentFeature
+                              ] ;
+              rdfs:comment "Morphological component of the allograph form. For example: \"Tail\", \"Horizontal line\", \"Angle\", \"Arc\""@en ,
+                           "Morphologischer Bestandteil der Allographenform. Bsp.: „Schweif“, „Querstrich“, „Winkel“, „Bogen“"@de ;
+              rdfs:label "Fragment"@de ,
+                         "Fragment"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Typeface
+:Typeface rdf:type owl:Class ;
+          rdfs:subClassOf :CategoryScriptGroups ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :manifestation ;
+                            owl:allValuesFrom :Font
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :part ;
+                            owl:allValuesFrom :Type
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :formFeature ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :ContrastModel
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :formFeature ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :FormPrinciple
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :formFeature ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Lines
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :formFeature ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Terminals
+                          ] ;
+          rdfs:comment "A intentionally composed repertoire of types designed according to a uniform typographic pattern (e.g. shape of serifs, stroke contrast), e.g. \"St-G typeface\", \"Garamond\""@en ,
+                       "Ein bewusst zusammengesetztes Repertoire aus Typen, die nach einem einheitlichen typografischen Formenschema (z. B. Form der Serifen, Strichkontrast) gestaltet sind, z. B. \"St-G-Schrift\", \"Garamond\""@de ;
+          rdfs:label "Schriftart"@de ,
+                     "Typeface"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#VariousSizes
+:VariousSizes rdf:type owl:Class ;
+              rdfs:subClassOf :Font ;
+              rdfs:comment "Verschiedene Größen, oft in dekorativen Zierschriften"@de ;
+              rdfs:label "Various Sizes"@en ,
+                         "Verschiedene Schriftgrößen"@de .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+:Satztrenner rdfs:label "Satztrenner" .
+
+
+owl:Thing rdfs:label "Mikrotypografie"@de ,
+                     "Microtypography"@en .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Allograph
+                :Archigrapheme
+                :FontType
+                :Grapheme
+                :Type
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Apex
+                :Arm
+                :Bow
+                :Counter
+                :Crossbar
+                :Diagonal
+                :Sides
+                :Stem
+                :Tail
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :BodyText
+                :Decoration
+                :Title
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Cicero
+                :Korpus
+                :Petit
+                :Tertia
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Cicero
+                :Korpus
+                :Tertia
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :ContrastModel
+                :FormPrinciple
+                :Lines
+                :Terminals
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :DecorativeFormPrinciple
+                :DynamicFormPrinciple
+                :GeometricFormPrinciple
+                :StaticFormPrinciple
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :FunctionArea
+                :Item
+                :ItemPart
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :ItemPartColophone
+                :ItemPartPoems
+                :ItemPartPreface
+                :ItemPartTitle
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi
