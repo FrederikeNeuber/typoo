@@ -277,6 +277,14 @@
             <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#manifestation"/>
         </owl:propertyChainAxiom>
         <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#manifestation"/>
+            <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#manifestation"/>
+            <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#manifestation"/>
+            <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#manifestation"/>
+            <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#manifestation"/>
+            <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#manifestation"/>
+        </owl:propertyChainAxiom>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
             <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#manifestationOf"/>
             <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#manifestationOf"/>
         </owl:propertyChainAxiom>
@@ -532,7 +540,7 @@
     <owl:Class rdf:about="http://gams.uni-graz.at/o:typoo.ontology#BrokenLines">
         <rdfs:subClassOf rdf:resource="http://gams.uni-graz.at/o:typoo.ontology#Lines"/>
         <owl:disjointWith rdf:resource="http://gams.uni-graz.at/o:typoo.ontology#RoundedLines"/>
-        <rdfs:comment xml:lang="en">Broken lines (e.g. Fraktur fonts)</rdfs:comment>
+        <rdfs:comment xml:lang="en">Broken lines (e.g. Blackletter typefaces)</rdfs:comment>
         <rdfs:comment xml:lang="de">Gebrochene Strichführung (z. B. Fraktur-Schriften)</rdfs:comment>
         <rdfs:label xml:lang="en">Broken Lines</rdfs:label>
         <rdfs:label xml:lang="de">Gebrochene Linienführung</rdfs:label>
@@ -552,8 +560,8 @@
                 </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:comment xml:lang="en">Context classes represent the textual and/or material context in which typography occurs</rdfs:comment>
-        <rdfs:comment xml:lang="de">Kontextklassen repräsentieren den textuellen und/oder materialen Kontext, in dem Typografie auftritt</rdfs:comment>
+        <rdfs:comment xml:lang="en">Context classes represent the textual and functional context in which a font occurs</rdfs:comment>
+        <rdfs:comment xml:lang="de">Kontextklassen repräsentieren den textuellen und funktionellen Kontext, in dem ein Schriftschnitt verwendet wird</rdfs:comment>
         <rdfs:label xml:lang="en">Category Context</rdfs:label>
         <rdfs:label xml:lang="de">Kategorie Kontext</rdfs:label>
     </owl:Class>
@@ -573,8 +581,8 @@
                 </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:comment xml:lang="en">Form classes represent typographical design features of a typeface</rdfs:comment>
-        <rdfs:comment xml:lang="de">Formklassen repräsentieren die typografischen Gestaltungsmerkmale von Schriftarten</rdfs:comment>
+        <rdfs:comment xml:lang="en">Form classes represent the conventional typographic design features of typefaces</rdfs:comment>
+        <rdfs:comment xml:lang="de">Formklassen repräsentieren die konventionellen typografischen Gestaltungsmerkmale von Schriftarten</rdfs:comment>
         <rdfs:label xml:lang="en">Category Form</rdfs:label>
         <rdfs:label xml:lang="de">Kategorie Form</rdfs:label>
     </owl:Class>
@@ -610,11 +618,12 @@
                     <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#Archigrapheme"/>
                     <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#FontType"/>
                     <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#Grapheme"/>
+                    <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#Protograph"/>
                     <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#Type"/>
                 </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:comment xml:lang="de">Schriftindividuen Klassen repräsentieren Abstraktionsebenen singulärer Schrifteinheiten</rdfs:comment>
+        <rdfs:comment xml:lang="de">Schriftindividuenklassen repräsentieren Abstraktionsebenen singulärer Schrifteinheiten</rdfs:comment>
         <rdfs:comment xml:lang="en">Script individual classes represent abstraction levels of single units of microtypography</rdfs:comment>
         <rdfs:label xml:lang="en">Category Script Individuals</rdfs:label>
         <rdfs:label xml:lang="de">Kategorie Schriftindividuen</rdfs:label>
@@ -772,13 +781,20 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="http://gams.uni-graz.at/o:typoo.ontology#manifestation"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://gams.uni-graz.at/o:typoo.ontology#Protograph"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="http://gams.uni-graz.at/o:typoo.ontology#manifestationOf"/>
                 <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
                 <owl:onClass rdf:resource="http://gams.uni-graz.at/o:typoo.ontology#Type"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment xml:lang="en">A stylistic manifestation of the type, whereby &quot;style&quot; is used here in the typographic sense, i.e. for the form of expression of the type in a certain size: &quot;t&quot; of the St-G font in Cicero; &quot;t&quot; of the St-G font in Petit.</rdfs:comment>
-        <rdfs:comment xml:lang="de">Eine stilistische Ausprägung der Type, wobei &quot;Stil&quot; hier im typografischen Sinne gebraucht wird, also für die Ausprägungsform der Type bspw. in einem bestimmten Schriftgrad: &quot;t&quot; der St-G-Schrift in Cicero; &quot;t&quot;der St-G-Schrift in Petit.</rdfs:comment>
+        <rdfs:comment xml:lang="en">A manifestation of a type in a certain typographic style, e.g. in a certain type size: &quot;t&quot; of the St-G font in Cicero; &quot;t&quot; of the St-G font in Petit.</rdfs:comment>
+        <rdfs:comment xml:lang="de">Eine Stilausprägung der Type in einem typografischen Stil, z.B. in einem bestimmten Schriftgrad: &quot;t&quot; der St-G-Schrift in Cicero; &quot;t&quot;der St-G-Schrift in Petit.</rdfs:comment>
         <rdfs:label xml:lang="de">Drucktype</rdfs:label>
         <rdfs:label xml:lang="en">Font type</rdfs:label>
     </owl:Class>
@@ -857,7 +873,7 @@
                 <owl:onClass rdf:resource="http://gams.uni-graz.at/o:typoo.ontology#Archigrapheme"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment xml:lang="en">Differentiation between upper and lower case letters as the smallest distinctive unit of a written language system</rdfs:comment>
+        <rdfs:comment xml:lang="en">Differentiation between upper and lower case letters as the smallest distinctive linguistic unit of a written language system</rdfs:comment>
         <rdfs:comment xml:lang="de">Differenzierung zwischen Groß- und Kleinbuchstaben als kleinste bedeutungsunterscheidende Einheit eines Schriftsprachsystems. Bsp.: &quot;Minuskel g&quot; und &quot;Majuskel G&quot; in &quot;genossen&quot; und &quot;Genossen&quot;</rdfs:comment>
         <rdfs:label xml:lang="de">Graphem</rdfs:label>
         <rdfs:label xml:lang="en">Grapheme</rdfs:label>
@@ -965,7 +981,7 @@
     <owl:Class rdf:about="http://gams.uni-graz.at/o:typoo.ontology#LinearStroke">
         <rdfs:subClassOf rdf:resource="http://gams.uni-graz.at/o:typoo.ontology#ContrastModel"/>
         <owl:disjointWith rdf:resource="http://gams.uni-graz.at/o:typoo.ontology#StrokeContrast"/>
-        <rdfs:comment xml:lang="en">Linear strokes, i.e. no contrast (e.g. grotesque fonts)</rdfs:comment>
+        <rdfs:comment xml:lang="en">Linear strokes, i.e. no contrast (e.g. Grotesque typefaces)</rdfs:comment>
         <rdfs:comment xml:lang="de">Lineare Striche, d. h. kein Kontrast (z. B. Grotesk-Schriften)</rdfs:comment>
         <rdfs:label xml:lang="en">Linear Strokes</rdfs:label>
         <rdfs:label xml:lang="de">Lineare Striche</rdfs:label>
@@ -992,6 +1008,20 @@
         <rdfs:comment xml:lang="de">Eine kleine Schriftgröße im Bleisatz. Sie hat eine Kegelhöhe von acht Didot-Punkten, das entspricht 3,008 mm</rdfs:comment>
         <rdfs:label xml:lang="de">Petit</rdfs:label>
         <rdfs:label xml:lang="en">Petit</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://gams.uni-graz.at/o:typoo.ontology#Protograph -->
+
+    <owl:Class rdf:about="http://gams.uni-graz.at/o:typoo.ontology#Protograph">
+        <rdfs:subClassOf rdf:resource="http://gams.uni-graz.at/o:typoo.ontology#CategoryScriptIndividuals"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://gams.uni-graz.at/o:typoo.ontology#manifestationOf"/>
+                <owl:someValuesFrom rdf:resource="http://gams.uni-graz.at/o:typoo.ontology#FontType"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -1072,7 +1102,7 @@
 
     <owl:Class rdf:about="http://gams.uni-graz.at/o:typoo.ontology#StrokeContrast">
         <rdfs:subClassOf rdf:resource="http://gams.uni-graz.at/o:typoo.ontology#ContrastModel"/>
-        <rdfs:comment xml:lang="en">Lines with different widths (e.g. Antiqua fonts)</rdfs:comment>
+        <rdfs:comment xml:lang="en">Lines with different widths (e.g. Antiqua typefaces)</rdfs:comment>
         <rdfs:comment xml:lang="de">Striche mit unterschiedlicher Breite (z. B. Antiqua-Schriften)</rdfs:comment>
         <rdfs:label xml:lang="de">Strichkontrast</rdfs:label>
         <rdfs:label xml:lang="en">Stroke Contrast</rdfs:label>
@@ -1098,7 +1128,7 @@
         <rdfs:subClassOf rdf:resource="http://gams.uni-graz.at/o:typoo.ontology#CategoryForm"/>
         <rdfs:comment xml:lang="en">Design of terminals</rdfs:comment>
         <rdfs:comment xml:lang="de">Gestaltung der Endstriche</rdfs:comment>
-        <rdfs:label xml:lang="de">Endstrichbehandlung</rdfs:label>
+        <rdfs:label xml:lang="de">Endstriche</rdfs:label>
         <rdfs:label xml:lang="en">Terminals</rdfs:label>
     </owl:Class>
     
@@ -1155,7 +1185,7 @@
                 <owl:onClass rdf:resource="http://gams.uni-graz.at/o:typoo.ontology#Allograph"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment xml:lang="en">An allograph form designed with typographical resources. Slight structural modifications of the allograph form can also be part of the type design, e.g: &quot;A&quot; the Garamond, &quot;A&quot; the Akzidenz-Grotesk, &quot;A&quot; the St-G typeface (with flat vertex)</rdfs:comment>
+        <rdfs:comment xml:lang="en">A typographically individual allographical form within a typeface. Slight structural modifications of the allograph form can also be part of the type design, e.g: &quot;A&quot; the Garamond, &quot;A&quot; the Akzidenz-Grotesk, &quot;A&quot; the St-G typeface (with flat vertex)</rdfs:comment>
         <rdfs:comment xml:lang="de">Eine mit typografischen Mitteln gestaltete Allographenform. Auch leichte strukturelle Modifikationen der Allographenform können zur Gestaltung der Type zählen, z. B.: &quot;A&quot; der Garamond, &quot;A&quot; der Akzidenz-Grotesk, &quot;A&quot; der St-G-Schrift (mit flachem Scheitelpunkt)</rdfs:comment>
         <rdfs:label xml:lang="de">Type</rdfs:label>
         <rdfs:label xml:lang="en">Type</rdfs:label>
@@ -1277,6 +1307,7 @@
             <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#Archigrapheme"/>
             <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#FontType"/>
             <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#Grapheme"/>
+            <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#Protograph"/>
             <rdf:Description rdf:about="http://gams.uni-graz.at/o:typoo.ontology#Type"/>
         </owl:members>
     </rdf:Description>

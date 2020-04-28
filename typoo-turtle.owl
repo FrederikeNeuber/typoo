@@ -208,6 +208,13 @@
                                    :manifestation
                                    :manifestation
                                  ) ,
+                                 ( :manifestation
+                                   :manifestation
+                                   :manifestation
+                                   :manifestation
+                                   :manifestation
+                                   :manifestation
+                                 ) ,
                                  ( :manifestationOf
                                    :manifestationOf
                                  ) ,
@@ -395,7 +402,7 @@ owl:topObjectProperty rdf:type owl:ObjectProperty ,
 :BrokenLines rdf:type owl:Class ;
              rdfs:subClassOf :Lines ;
              owl:disjointWith :RoundedLines ;
-             rdfs:comment "Broken lines (e.g. Fraktur fonts)"@en ,
+             rdfs:comment "Broken lines (e.g. Blackletter typefaces)"@en ,
                           "Gebrochene Strichführung (z. B. Fraktur-Schriften)"@de ;
              rdfs:label "Broken Lines"@en ,
                         "Gebrochene Linienführung"@de .
@@ -409,8 +416,8 @@ owl:topObjectProperty rdf:type owl:ObjectProperty ,
                                                      :ItemPart
                                                    )
                                      ] ;
-                 rdfs:comment "Context classes represent the textual and/or material context in which typography occurs"@en ,
-                              "Kontextklassen repräsentieren den textuellen und/oder materialen Kontext, in dem Typografie auftritt"@de ;
+                 rdfs:comment "Context classes represent the textual and functional context in which a font occurs"@en ,
+                              "Kontextklassen repräsentieren den textuellen und funktionellen Kontext, in dem ein Schriftschnitt verwendet wird"@de ;
                  rdfs:label "Category Context"@en ,
                             "Kategorie Kontext"@de .
 
@@ -424,8 +431,8 @@ owl:topObjectProperty rdf:type owl:ObjectProperty ,
                                                   :Terminals
                                                 )
                                   ] ;
-              rdfs:comment "Form classes represent typographical design features of a typeface"@en ,
-                           "Formklassen repräsentieren die typografischen Gestaltungsmerkmale von Schriftarten"@de ;
+              rdfs:comment "Form classes represent the conventional typographic design features of typefaces"@en ,
+                           "Formklassen repräsentieren die konventionellen typografischen Gestaltungsmerkmale von Schriftarten"@de ;
               rdfs:label "Category Form"@en ,
                          "Kategorie Form"@de .
 
@@ -450,10 +457,11 @@ owl:topObjectProperty rdf:type owl:ObjectProperty ,
                                                                :Archigrapheme
                                                                :FontType
                                                                :Grapheme
+                                                               :Protograph
                                                                :Type
                                                              )
                                                ] ;
-                           rdfs:comment "Schriftindividuen Klassen repräsentieren Abstraktionsebenen singulärer Schrifteinheiten"@de ,
+                           rdfs:comment "Schriftindividuenklassen repräsentieren Abstraktionsebenen singulärer Schrifteinheiten"@de ,
                                         "Script individual classes represent abstraction levels of single units of microtypography"@en ;
                            rdfs:label "Category Script Individuals"@en ,
                                       "Kategorie Schriftindividuen"@de .
@@ -568,12 +576,17 @@ owl:topObjectProperty rdf:type owl:ObjectProperty ,
                             owl:someValuesFrom :Font
                           ] ,
                           [ rdf:type owl:Restriction ;
+                            owl:onProperty :manifestation ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Protograph
+                          ] ,
+                          [ rdf:type owl:Restriction ;
                             owl:onProperty :manifestationOf ;
                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                             owl:onClass :Type
                           ] ;
-          rdfs:comment "A stylistic manifestation of the type, whereby \"style\" is used here in the typographic sense, i.e. for the form of expression of the type in a certain size: \"t\" of the St-G font in Cicero; \"t\" of the St-G font in Petit."@en ,
-                       "Eine stilistische Ausprägung der Type, wobei \"Stil\" hier im typografischen Sinne gebraucht wird, also für die Ausprägungsform der Type bspw. in einem bestimmten Schriftgrad: \"t\" der St-G-Schrift in Cicero; \"t\"der St-G-Schrift in Petit."@de ;
+          rdfs:comment "A manifestation of a type in a certain typographic style, e.g. in a certain type size: \"t\" of the St-G font in Cicero; \"t\" of the St-G font in Petit."@en ,
+                       "Eine Stilausprägung der Type in einem typografischen Stil, z.B. in einem bestimmten Schriftgrad: \"t\" der St-G-Schrift in Cicero; \"t\"der St-G-Schrift in Petit."@de ;
           rdfs:label "Drucktype"@de ,
                      "Font type"@en .
 
@@ -631,7 +644,7 @@ owl:topObjectProperty rdf:type owl:ObjectProperty ,
                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                             owl:onClass :Archigrapheme
                           ] ;
-          rdfs:comment "Differentiation between upper and lower case letters as the smallest distinctive unit of a written language system"@en ,
+          rdfs:comment "Differentiation between upper and lower case letters as the smallest distinctive linguistic unit of a written language system"@en ,
                        "Differenzierung zwischen Groß- und Kleinbuchstaben als kleinste bedeutungsunterscheidende Einheit eines Schriftsprachsystems. Bsp.: \"Minuskel g\" und \"Majuskel G\" in \"genossen\" und \"Genossen\""@de ;
           rdfs:label "Graphem"@de ,
                      "Grapheme"@en .
@@ -709,7 +722,7 @@ owl:topObjectProperty rdf:type owl:ObjectProperty ,
 :LinearStroke rdf:type owl:Class ;
               rdfs:subClassOf :ContrastModel ;
               owl:disjointWith :StrokeContrast ;
-              rdfs:comment "Linear strokes, i.e. no contrast (e.g. grotesque fonts)"@en ,
+              rdfs:comment "Linear strokes, i.e. no contrast (e.g. Grotesque typefaces)"@en ,
                            "Lineare Striche, d. h. kein Kontrast (z. B. Grotesk-Schriften)"@de ;
               rdfs:label "Linear Strokes"@en ,
                          "Lineare Striche"@de .
@@ -730,6 +743,15 @@ owl:topObjectProperty rdf:type owl:ObjectProperty ,
        rdfs:comment "Eine kleine Schriftgröße im Bleisatz. Sie hat eine Kegelhöhe von acht Didot-Punkten, das entspricht 3,008 mm"@de ;
        rdfs:label "Petit"@de ,
                   "Petit"@en .
+
+
+###  http://gams.uni-graz.at/o:typoo.ontology#Protograph
+:Protograph rdf:type owl:Class ;
+            rdfs:subClassOf :CategoryScriptIndividuals ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :manifestationOf ;
+                              owl:someValuesFrom :FontType
+                            ] .
 
 
 ###  http://gams.uni-graz.at/o:typoo.ontology#RoundedLines
@@ -789,7 +811,7 @@ owl:topObjectProperty rdf:type owl:ObjectProperty ,
 ###  http://gams.uni-graz.at/o:typoo.ontology#StrokeContrast
 :StrokeContrast rdf:type owl:Class ;
                 rdfs:subClassOf :ContrastModel ;
-                rdfs:comment "Lines with different widths (e.g. Antiqua fonts)"@en ,
+                rdfs:comment "Lines with different widths (e.g. Antiqua typefaces)"@en ,
                              "Striche mit unterschiedlicher Breite (z. B. Antiqua-Schriften)"@de ;
                 rdfs:label "Strichkontrast"@de ,
                            "Stroke Contrast"@en .
@@ -809,7 +831,7 @@ owl:topObjectProperty rdf:type owl:ObjectProperty ,
            rdfs:subClassOf :CategoryForm ;
            rdfs:comment "Design of terminals"@en ,
                         "Gestaltung der Endstriche"@de ;
-           rdfs:label "Endstrichbehandlung"@de ,
+           rdfs:label "Endstriche"@de ,
                       "Terminals"@en .
 
 
@@ -849,7 +871,7 @@ owl:topObjectProperty rdf:type owl:ObjectProperty ,
                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onClass :Allograph
                       ] ;
-      rdfs:comment "An allograph form designed with typographical resources. Slight structural modifications of the allograph form can also be part of the type design, e.g: \"A\" the Garamond, \"A\" the Akzidenz-Grotesk, \"A\" the St-G typeface (with flat vertex)"@en ,
+      rdfs:comment "A typographically individual allographical form within a typeface. Slight structural modifications of the allograph form can also be part of the type design, e.g: \"A\" the Garamond, \"A\" the Akzidenz-Grotesk, \"A\" the St-G typeface (with flat vertex)"@en ,
                    "Eine mit typografischen Mitteln gestaltete Allographenform. Auch leichte strukturelle Modifikationen der Allographenform können zur Gestaltung der Type zählen, z. B.: \"A\" der Garamond, \"A\" der Akzidenz-Grotesk, \"A\" der St-G-Schrift (mit flachem Scheitelpunkt)"@de ;
       rdfs:label "Type"@de ,
                  "Type"@en .
@@ -933,6 +955,7 @@ owl:Thing rdfs:label "Mikrotypografie"@de ,
                 :Archigrapheme
                 :FontType
                 :Grapheme
+                :Protograph
                 :Type
               )
 ] .
