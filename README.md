@@ -20,4 +20,6 @@ If you have questions or want share your opinion just open a GitHub issue or con
 
 **License:** CC-BY 3.0
 
+**Citation Recomandation:** Neuber, Frederike. "typoo: an ontology to describe microtypography." Date Published 28.4.2020. Date Accessed: #### (https://github.com/FrederikeNeuber/typoo)
+
     
