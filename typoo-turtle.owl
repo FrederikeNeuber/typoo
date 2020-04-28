@@ -15,15 +15,6 @@
                                             terms:creator "Frederike Neuber" .
 
 #################################################################
-#    Annotation properties
-#################################################################
-
-###  http://www.w3.org/2004/02/skos/core#editorialNote
-skos:editorialNote rdf:type owl:AnnotationProperty ;
-                   rdfs:isDefinedBy "http://www.w3.org/2004/02/skos/core#editorialNote"^^xsd:anyURI .
-
-
-#################################################################
 #    Object Properties
 #################################################################
 
