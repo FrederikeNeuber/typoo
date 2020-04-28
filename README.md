@@ -16,7 +16,7 @@ If you have questions or want share your opinion just open a GitHub issue or con
 
 **Author:** Frederike Neuber (neuber.frederike@gmail.com)
 
-**Context of Creation:** typoo emerged within the author’s PhD at the Centre for Information Modelling at the University of Graz and the University of Cologne (finished 2019, to be published) and with the support of the Digital Scholarly Editions Initial Training Network DiXiT (funded 2013 –2017 under Marie Curie Actions within the European Commission’s 7th Framework). 
+**Context of Creation:** typoo emerged within the author’s PhD at the Centre for Information Modelling at the University of Graz and the University of Cologne (finished 2019, to be published). It was supported by the *Digital Scholarly Editions Initial Training Network* DiXiT (funded 2013–2017 under Marie Curie Actions within the European Commission’s 7th Framework). 
 
 **License:** CC-BY 3.0
 
