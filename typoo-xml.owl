@@ -414,30 +414,6 @@
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
-    // Data properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    
-
-
-    <!-- http://gams.uni-graz.at/o:typoo.ontology#protograph -->
-
-    <owl:DatatypeProperty rdf:about="http://gams.uni-graz.at/o:typoo.ontology#protograph">
-        <rdfs:domain rdf:resource="http://gams.uni-graz.at/o:typoo.ontology#Type"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
-        <rdfs:comment xml:lang="de">Stellvertreter bzw. ‚Schablone‘ für alle im Druckerzeugnis
-            gleichförmig erscheinenden Graphen, welche auf die gleiche Drucktype zurückgehen. Bsp.:
-            „Das ‚t‘ aus dem Teppich des Lebens“; „Das ‚t‘ aus der Gesamt-Ausgabe“.</rdfs:comment>
-        <rdfs:label xml:lang="de">Protograph</rdfs:label>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
     // Classes
     //
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -1022,6 +998,10 @@
                 <owl:someValuesFrom rdf:resource="http://gams.uni-graz.at/o:typoo.ontology#FontType"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:comment xml:lang="de">Stellvertreter bzw. ‚Schablone‘ für alle im Druckerzeugnis gleichförmig erscheinenden Graphen, welche auf die gleiche Drucktype zurückgehen.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Substitute or &apos;template&apos; for all graphs appearing uniformly in the printed product, which are the result of various printing types.</rdfs:comment>
+        <rdfs:label xml:lang="de">Protograph</rdfs:label>
+        <rdfs:label xml:lang="en">Protograph</rdfs:label>
     </owl:Class>
     
 

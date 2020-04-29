@@ -316,20 +316,6 @@ owl:topObjectProperty rdf:type owl:ObjectProperty ,
 
 
 #################################################################
-#    Data properties
-#################################################################
-
-###  http://gams.uni-graz.at/o:typoo.ontology#protograph
-:protograph rdf:type owl:DatatypeProperty ;
-            rdfs:domain :Type ;
-            rdfs:range xsd:anyURI ;
-            rdfs:comment """Stellvertreter bzw. ‚Schablone‘ für alle im Druckerzeugnis
-            gleichförmig erscheinenden Graphen, welche auf die gleiche Drucktype zurückgehen. Bsp.:
-            „Das ‚t‘ aus dem Teppich des Lebens“; „Das ‚t‘ aus der Gesamt-Ausgabe“."""@de ;
-            rdfs:label "Protograph"@de .
-
-
-#################################################################
 #    Classes
 #################################################################
 
@@ -751,7 +737,11 @@ owl:topObjectProperty rdf:type owl:ObjectProperty ,
                             [ rdf:type owl:Restriction ;
                               owl:onProperty :manifestationOf ;
                               owl:someValuesFrom :FontType
-                            ] .
+                            ] ;
+            rdfs:comment "Stellvertreter bzw. ‚Schablone‘ für alle im Druckerzeugnis gleichförmig erscheinenden Graphen, welche auf die gleiche Drucktype zurückgehen."@de ,
+                         "Substitute or 'template' for all graphs appearing uniformly in the printed product, which are the result of various printing types."@en ;
+            rdfs:label "Protograph"@de ,
+                       "Protograph"@en .
 
 
 ###  http://gams.uni-graz.at/o:typoo.ontology#RoundedLines
